@@ -16,37 +16,28 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-  let result = ''
+  let realStr = `${str}`
   let separatorForStr = (options.separator || '+')
   let separatorForAdd = (options.additionSeparator || '|')
+  let repeatForStr = (options.repeatTimes || 1)
+  let repeatForAdd = (options.additionRepeatTimes || 1)
+  let result = ''
 
-  for (let i = 0; i < options.repeatTimes; i++) {
-    result += str;
-
-
-    for (let k = 0; k < options.additionRepeatTimes; k++) {
-      result += options.addition + separatorForAdd;
-    }
-
-    if (options.addition) {
+  for (let i = 0; i < repeatForStr; i++) {
+    result += realStr;
+    if (options.addition !== undefined) {
+      for (let k = 0; k < repeatForAdd; k++) {
+        result += `${options.addition}` + separatorForAdd;
+      }
       result = result.slice(0, -separatorForAdd.length)
     }
-
     result += separatorForStr;
-
   }
-
   result = result.slice(0, -separatorForStr.length)
-
-  console.log(result)
-  console.log(options)
-  console.log(options.repeatTimes)
   return result
-
-
 }
 
-repeater('la', { repeatTimes: 3 })
+repeater(true, { repeatTimes: 3, separator: 's' })
 
 module.exports = {
   repeater
