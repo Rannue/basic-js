@@ -15,6 +15,12 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 function getSeason(date) {
 
+  try {
+    isNaN(Date.parse(date))
+  } catch {
+    throw new Error("Invalid date!")
+  }
+
   if (isNaN(Date.parse(date))) {
     throw new Error("Invalid date!")
   }
@@ -47,7 +53,6 @@ function getSeason(date) {
 
 }
 
-getSeason(new Date(1812, 88, 9, 10, 11, 12))
 
 module.exports = {
   getSeason
