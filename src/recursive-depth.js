@@ -17,21 +17,37 @@ class DepthCalculator {
   constructor() {
     this.count = 1
     this.testCount = 1;
+    this.currentIndex = 0;
   }
 
   calculateDepth(arr) {
+    // for (let i = 0; i < arr.length; i++) {
+    //   if (Array.isArray(arr[i])) {
+    //     this.testCount++
+    //     this.calculateDepth(arr[i])
+    //   }
+    //   if (this.testCount > this.count) {
+    //     this.count = this.testCount
+    //     this.testCount = 1
+    //   }
+    // }
+    // let result = this.count;
+    // return result;
     for (let i = 0; i < arr.length; i++) {
+      this.currentIndex = i;
       if (Array.isArray(arr[i])) {
-        this.testCount++
-        this.calculateDepth(arr[i])
-        if (this.testCount > this.count) {
-          this.count = this.testCount
-          this.testCount = 1
-        }
+        this.count++
+        let t = this.calculateDepth(arr[i])
+        this.testCount = t > this.testCount
+          ? t
+          : this.testCount
       }
     }
-    let result = this.count;
-    return result
+    return this.currentIndex == arr.length - 1
+      ? this.testCount > this.count
+        ? this.testCount
+        : this.count
+      : this.count
   }
 }
 const depthCalc = new DepthCalculator();

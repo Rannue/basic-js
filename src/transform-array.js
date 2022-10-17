@@ -14,8 +14,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function transform(arr) {
-  const error = new Error("'arr' parameter must be an instance of the Array!");
-
   if (Array.isArray(arr)) {
     let newArr = [];
     let Arr = arr
@@ -42,13 +40,11 @@ function transform(arr) {
       }
     }
     console.log(newArr)
-    return newArr
-  } else {
-    return error
-  }
-}
 
-transform(null)
+    return newArr
+  }
+  throw Error("'arr' parameter must be an instance of the Array!")
+}
 
 module.exports = {
   transform

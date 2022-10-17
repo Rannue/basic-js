@@ -16,8 +16,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(date) {
 
   if (isNaN(Date.parse(date))) {
-    console.log("Invalid date!")
-    return "Invalid date!"
+    throw new Error("Invalid date!")
   }
 
   let num = date.getMonth();
@@ -43,8 +42,7 @@ function getSeason(date) {
       return 'autumn'
 
     default:
-      console.log("Invalid date!")
-      return "Invalid date!"
+      throw new Error("Invalid date!")
   }
 
 }
